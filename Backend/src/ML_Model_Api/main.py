@@ -1,0 +1,34 @@
+import pickle
+import numpy
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+# Load the pre-trained model
+model = pickle.load(open('model.pkl', 'rb'))
+
+# Endpoint to predict forest safety with query parameters
+@app.get("/predict_forest/")
+async def predict_forest(temperature: int, oxygen: int, humidity: int):
+    
+    features = [temperature, oxygen, humidity]
+    val = [numpy.array(features)]
+    
+    # Perform prediction using the pre-trained model
+    prediction = model.predict_proba(val)
+    probability_of_fire = prediction[0][1]
+
+    if probability_of_fire > 0.5 :
+        status = "Your Forest is in Danger."
+        Boolean = True
+    else:
+        status = "Your Forest is safe."
+        Boolean = False
+    
+    result = {
+        "status": status,
+        "probability": round(probability_of_fire, 2),
+        "value" : Boolean
+    }
+
+    return result
