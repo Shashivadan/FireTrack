@@ -1,3 +1,5 @@
-function authMiddleWare(req, res, next) {}
+function authMiddleWare(req, res, next) {
+    
+}
 
 export { authMiddleWare };
