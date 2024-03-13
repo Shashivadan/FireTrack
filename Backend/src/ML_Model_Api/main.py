@@ -5,12 +5,14 @@ import uvicorn
 
 app = FastAPI()
 
-# Load the pre-trained model
+
 model = pickle.load(open('model.pkl', 'rb'))
 
-# Endpoint to predict forest safety with query parameters
-@app.get("/predict_forest/")
+@app.get("/predict_forest")
 async def predict_forest(temperature: int, oxygen: int, humidity: int):
+
+
+    print(temperature)
 
 
     
@@ -40,5 +42,5 @@ async def predict_forest(temperature: int, oxygen: int, humidity: int):
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=5000, log_level="info")
 
-# curl -X GET "http://127.0.0.1:8000/predict_forest/?temperature=25&oxygen=18&humidity=60" -H "accept: application/json" 
+# curl -X GET "http://127.0.0.1:8000/predict_forest?temperature=25&oxygen=18&humidity=60" -H "accept: application/json" 
 

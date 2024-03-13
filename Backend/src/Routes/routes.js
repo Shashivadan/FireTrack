@@ -5,16 +5,15 @@ import { signUp } from "../controllers/users/signUp.js";
 
 import { authMiddleWare } from "../middleware/authMiddeWare.js";
 
+import { model_api } from "../controllers/api.model/api.model.js";
+
 const router = Router();
 
-// auth
+// auth route
 router.post("/signin", signIn);
 router.post("/signup", signUp);
 
-router.get("/model", authMiddleWare, (req, res) => {
-  res.json({
-    userId: req.userId,
-  });
-});
+// model route
+router.get("/model", model_api);
 
 export { router };
