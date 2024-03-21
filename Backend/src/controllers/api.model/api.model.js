@@ -29,7 +29,7 @@ async function model_api(req, res) {
   }
 
   try {
-    const resp = await axios.get("http://127.0.0.1:5000/predict_forest", {
+    const resp = await axios.get(process.env.ML_MODEL_API, {
       params: {
         temperature,
         oxygen,
@@ -44,7 +44,7 @@ async function model_api(req, res) {
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
+    res.status(500).json({
       error,
     });
   }

@@ -45,6 +45,7 @@ async function signIn(req, res) {
       user: { username: user.username, email: user.email },
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       error,
     });

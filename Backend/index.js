@@ -4,7 +4,9 @@ import cors from "cors";
 
 import { router } from "./src/Routes/routes.js";
 
-mongoose.connect("mongodb://localhost:27017/fireforest");
+mongoose.connect(process.env.DATABASE_URL);
+
+const port = process.env.PORT | 3000;
 
 const app = express();
 
@@ -14,4 +16,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1", router);
 
-app.listen(3000);
+app.listen(port);
