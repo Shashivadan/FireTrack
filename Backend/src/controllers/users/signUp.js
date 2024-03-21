@@ -25,7 +25,7 @@ async function signUp(req, res) {
 
   if (!success) {
     return res.status(403).json({
-      massege: "give data has invalid values",
+      massage: "give data has invalid values",
     });
   }
 
