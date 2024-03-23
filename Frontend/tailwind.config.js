@@ -18,8 +18,6 @@ module.exports = {
       fontfamily: {
         Inter: [
           "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
           "Segoe UI",
           "Roboto",
           "Oxygen-Sans",
