@@ -1,10 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 
 function Nav() {
+  const Navigate = useNavigate();
+
+  const signInHandle = () => {
+    Navigate("/signin");
+  };
+
   return (
     <div>
-      <div className=" font-Inter p-2 flex justify-between items-center">
+      <div className=" font-Inter p-2 flex justify-between items-center ">
         <div className="flex items-center gap-6 mt-3">
           <h1 className=" font-bold text-2xl cursor-auto">FireTrick</h1>
           <NavLink
@@ -26,9 +32,13 @@ function Nav() {
             Doc
           </NavLink>
         </div>
-        <div className=" flex gap-3">
-          <Button className=" font-semibold bg-[#282c43]">Sign In</Button>
-          <Button className=" font-semibold bg-[#282c43]">Sign Up</Button>
+        <div className=" flex gap-3 justify-center ">
+          <Button
+            onClick={signInHandle}
+            className=" font-[550] bg-[#282c43] text-[0.8rem]"
+          >
+            Sign In
+          </Button>
         </div>
       </div>
     </div>
