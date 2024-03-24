@@ -8,17 +8,22 @@ function SignUp() {
   const handleSignUpNavigate: () => void = () => {
     Navigate("/signin");
   };
+  const handleHomeNavigate: () => void = () => {
+    Navigate("/");
+  };
   return (
     <div className="h-screen w-ful bg-[#030711]">
       <div className=" h-full w-full flex">
         <div className="bg-gray-800 h-full w-1/2 hidden lg:block "></div>
         <div className=" text-white w-full  flex justify-center items-center lg:w-1/2 relative ">
-          <Button
-            onClick={handleSignUpNavigate}
-            className=" absolute z-10 bg-transparent font-medium top-8 right-8"
-          >
-            Sign In
-          </Button>
+          <div className="flex absolute z-10  font-medium top-8 right-8">
+            <Button onClick={handleSignUpNavigate} className=" bg-transparent">
+              Sign In
+            </Button>
+            <Button onClick={handleHomeNavigate} className=" bg-transparent">
+              Home
+            </Button>
+          </div>
           <div className=" sm:w-[350px]">
             <form className=" flex flex-col gap-5" action="">
               <div className="flex flex-col items-center">

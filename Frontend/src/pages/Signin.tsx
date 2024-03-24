@@ -58,7 +58,7 @@ function Signin() {
                 placeholder="password"
               />
             </div>
-            <Button className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+            <Button className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]">
               Sign In with Email
             </Button>
 
