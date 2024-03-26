@@ -3,15 +3,19 @@ import Home from "./pages/Home";
 
 import Signin from "./pages/Signin";
 import SignUp from "./pages/SignUp";
+import HeroModel from "./pages/HeroModel";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home></Home>} />
-        <Route path="/signin" Component={Signin} />
-        <Route path="/signup" Component={SignUp} />
-      </Routes>
+      <div className=" bg-[#030711] text-white ">
+        <Routes>
+          <Route path="/" element={<Home></Home>} />
+          <Route path="/signin" Component={Signin} />
+          <Route path="/signup" Component={SignUp} />
+          <Route path="/heromdole" Component={HeroModel} />
+        </Routes>
+      </div>
     </>
   );
 }
