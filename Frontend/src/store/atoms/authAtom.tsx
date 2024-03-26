@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const authAtom = atom({
   key: "authAtom",
-  default: null,
+  default: localStorage.getItem("currentUser"),
 });
 
 export { authAtom };

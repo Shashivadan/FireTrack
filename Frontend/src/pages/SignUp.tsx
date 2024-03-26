@@ -1,31 +1,66 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { authAtom } from "@/store/atoms/authAtom";
-import { SubmitHandler, UseFormHandleSubmit, useForm } from "react-hook-form";
-import { date } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-type FormFields = {
-  username: string;
-  email: string;
-  password: string;
-};
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "@/utils/AxiosBaseUrl";
+
+const schema = z
+  .object({
+    username: z
+      .string()
+      .min(5, { message: "username must contain 5 characters" }),
+    email: z.string().email({ message: "Must include a valid email" }),
+    password: z
+      .string()
+      .min(5, { message: "password must contain 4 characters" }),
+    confirmPassword: z
+      .string()
+      .min(4, { message: "password must contain 4 characters" }),
+  })
+  .refine((date) => date.password === date.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords does not match",
+  });
+
+type FormFields = z.infer<typeof schema>;
 
 function SignUp() {
-  const [auth, setauth] = useRecoilState(authAtom);
   const Navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
-    watch,
-  } = useForm<FormFields>();
+    // reset,
+    setError,
+  } = useForm<FormFields>({
+    resolver: zodResolver(schema),
+  });
 
-  const onSubmit: SubmitHandler<FormFields> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    try {
+      console.log(data);
+      const { username, password, email } = data;
+      const response = await axios.post("api/v1/signup", {
+        username,
+        email,
+        password,
+      });
+      const responseData = await response.data;
+      console.log(responseData.token);
+
+      localStorage.setItem("currentUser", responseData.user.username);
+      localStorage.setItem("token", responseData.token);
+      Navigate("/");
+    } catch (error) {
+      if (error?.response?.data?.massege) {
+        setError("root", { message: error?.response?.data?.massege });
+        return;
+      }
+      setError("root", { message: "Some the went wrong" });
+    }
   };
 
   return (
@@ -60,13 +95,7 @@ function SignUp() {
               </div>
               <div className=" flex flex-col gap-3 justify-center">
                 <Input
-                  {...register("username", {
-                    required: "Enter is required",
-                    minLength: {
-                      value: 6,
-                      message: "username must be more then 6 letters",
-                    },
-                  })}
+                  {...register("username")}
                   className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                   type="text"
                   placeholder="username"
@@ -77,7 +106,7 @@ function SignUp() {
                   </p>
                 )}
                 <Input
-                  {...register("email", { required: "Email is required" })}
+                  {...register("email")}
                   className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                   type="email"
                   placeholder="name@example.com"
@@ -87,13 +116,7 @@ function SignUp() {
                 </p>
 
                 <Input
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be 6 letters",
-                    },
-                  })}
+                  {...register("password")}
                   className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                   type="password"
                   placeholder="password"
@@ -103,10 +126,14 @@ function SignUp() {
                 </p>
 
                 <Input
+                  {...register("confirmPassword")}
                   className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                   type="password"
                   placeholder="Re-enter password"
                 />
+                <p className="text-sm text-red-900 ">
+                  {errors.confirmPassword?.message}
+                </p>
               </div>
               <div className="">
                 <Button
@@ -116,6 +143,7 @@ function SignUp() {
                   Sign Up with Email
                 </Button>
               </div>
+              <p className="text-sm text-red-900 ">{errors.root?.message}</p>
               <p className="w-[350px] text-slate-500 text-sm text-center">
                 By clicking continue, you agree to our Terms of Service and
                 Privacy Policy.

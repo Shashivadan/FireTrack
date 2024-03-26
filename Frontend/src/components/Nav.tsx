@@ -1,10 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { authAtom } from "@/store/atoms/authAtom";
 
 function Nav() {
   const Navigate = useNavigate();
   const [toggle, setToggle] = useState<boolean>(false);
+  const user = useRecoilValue(authAtom);
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -68,12 +71,16 @@ function Nav() {
           </div>
         </div>
         <div className=" mt-2  md:flex gap-3 justify-center ">
-          <Button
-            onClick={signInHandle}
-            className=" font-[550] bg-[#282c43] text-[0.8rem]"
-          >
-            Sign In
-          </Button>
+          {user ? (
+            <h1 className=" text-xl font-semibold">{user}</h1>
+          ) : (
+            <Button
+              onClick={signInHandle}
+              className=" font-[550] bg-[#282c43] text-[0.8rem]"
+            >
+              Sign In
+            </Button>
+          )}
         </div>
       </div>
     </div>

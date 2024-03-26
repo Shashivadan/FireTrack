@@ -10,7 +10,7 @@ function App() {
     <>
       <div className=" bg-[#030711] text-white ">
         <Routes>
-          <Route path="/" element={<Home></Home>} />
+          <Route path="/" Component={Home} />
           <Route path="/signin" Component={Signin} />
           <Route path="/signup" Component={SignUp} />
           <Route path="/heromdole" Component={HeroModel} />
