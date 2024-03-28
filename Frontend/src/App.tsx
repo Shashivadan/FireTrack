@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import SignUp from "./pages/SignUp";
 import HeroModel from "./pages/HeroModel";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
@@ -13,7 +14,15 @@ function App() {
           <Route path="/" Component={Home} />
           <Route path="/signin" Component={Signin} />
           <Route path="/signup" Component={SignUp} />
-          <Route path="/heromdole" Component={HeroModel} />
+
+          <Route
+            path="/froestprediction"
+            element={
+              <PrivateRoute>
+                <HeroModel />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </>

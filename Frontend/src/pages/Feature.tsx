@@ -1,5 +1,6 @@
 import Card from "@/components/Card";
 import { featuresList, FeatureTypes } from "@/utils/cardDate";
+import { Fragment } from "react/jsx-runtime";
 
 function Feature() {
   return (
@@ -18,21 +19,24 @@ function Feature() {
           </p>
         </div>
         <div className=" flex justify-center items-center mt-4">
-          <div key={678} className="p-4 gap-2 grid md:grid-cols-3 md:w-[80%]">
+          <div className="p-4 gap-2 grid md:grid-cols-3 md:w-[80%]">
             {featuresList.map(
-              ({ svgPath, title, description, id, viweBox }: FeatureTypes) => {
+              (
+                { svgPath, title, description, id, viweBox }: FeatureTypes,
+                idx: number
+              ) => {
                 return (
                   <>
-                    <div key={id}>
+                    <Fragment key={idx}>
                       <Card
                         viweBox={viweBox}
-                        key={id}
+                        key={id + "dd"}
                         id={id}
                         svgpath={svgPath}
                         title={title}
                         description={description}
                       />
-                    </div>
+                    </Fragment>
                   </>
                 );
               }

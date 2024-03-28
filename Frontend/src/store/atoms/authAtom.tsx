@@ -1,8 +1,12 @@
 import { atom } from "recoil";
 
-const authAtom = atom({
-  key: "authAtom",
-  default: localStorage.getItem("currentUser"),
+const globleUserAtom = atom({
+  key: "globleUserAtom",
+  default: sessionStorage.getItem("currentUser"),
 });
 
-export { authAtom };
+const finalData = atom({
+  key: "finalDataAtom",
+  default: null,
+});
+export { globleUserAtom, finalData };

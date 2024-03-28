@@ -3,8 +3,10 @@ import Feature from "./Feature";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <>
       <div className=" scrollbar-none text-stone-50 w-full scroll-smooth">
@@ -20,7 +22,10 @@ export default function Home() {
                 Innovative Fire Prevention Solutions
               </p>
               <div className=" mt-5 flex gap-2">
-                <Button className=" bg-white text-black text-[1rem] font-medium px-6 py-4  hover:bg-zinc-300 ">
+                <Button
+                  onClick={() => navigate("/froestprediction")}
+                  className=" bg-white text-black text-[1rem] font-medium px-6 py-4  hover:bg-zinc-300 "
+                >
                   Get Started
                 </Button>
                 <a

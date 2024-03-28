@@ -6,6 +6,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "@/utils/AxiosBaseUrl";
+import { useSetRecoilState } from "recoil";
+import { globleUserAtom } from "@/store/atoms/authAtom";
 
 const schema = z
   .object({
@@ -28,6 +30,7 @@ const schema = z
 type FormFields = z.infer<typeof schema>;
 
 function SignUp() {
+  const setCurrentUser = useSetRecoilState(globleUserAtom);
   const Navigate = useNavigate();
   const {
     register,
@@ -41,7 +44,6 @@ function SignUp() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      console.log(data);
       const { username, password, email } = data;
       const response = await axios.post("api/v1/signup", {
         username,
@@ -51,10 +53,12 @@ function SignUp() {
       const responseData = await response.data;
       console.log(responseData.token);
 
-      localStorage.setItem("currentUser", responseData.user.username);
-      localStorage.setItem("token", responseData.token);
+      sessionStorage.setItem("currentUser", responseData.user.username);
+      sessionStorage.setItem("token", responseData.token);
+      setCurrentUser(localStorage.getItem("currentUser"));
+
       Navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       if (error?.response?.data?.massege) {
         setError("root", { message: error?.response?.data?.massege });
         return;
