@@ -59,9 +59,6 @@ function HeroModel() {
       });
       reset();
       setResult(responseData.data.data);
-      // console.log(responseData.data.data);
-
-      // console.log(result);
     } catch (error) {
       console.log(error);
       setError("root", { message: "Some thing went wrong" });

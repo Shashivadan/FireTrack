@@ -1,5 +1,3 @@
-import { Component, useEffect, useState } from "react";
-
 interface PropType {
   status: string;
   probability: number;
