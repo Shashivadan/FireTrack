@@ -9,11 +9,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import useComponentSpanRender from "@/hooks/useComponentSpanRender";
-interface PropType {
+
+type PropType = {
   status: string;
   probability: number;
   value: boolean;
-}
+};
 
 const ParameterSchema = z
   .object({

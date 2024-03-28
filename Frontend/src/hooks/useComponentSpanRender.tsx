@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-interface resultType {}
+type resultType = {} | null | undefined;
 
 function useComponentSpanRender(result: resultType) {
   const [componentRender, setComponentRender] = useState(false);
