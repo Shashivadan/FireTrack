@@ -14,6 +14,6 @@ router.post("/signin", signIn);
 router.post("/signup", signUp);
 
 // model route
-router.get("/model", model_api);
+router.get("/model", authMiddleWare, model_api);
 
 export { router };

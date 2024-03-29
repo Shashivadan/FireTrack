@@ -35,9 +35,8 @@ async function signUp(req, res) {
     });
 
     if (exitingUser) {
-      return res.status(200).json({
+      return res.status(403).json({
         massege: "user already exists",
-        exitingUser,
       });
     }
 

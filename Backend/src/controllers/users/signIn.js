@@ -11,7 +11,7 @@ async function signIn(req, res) {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(405).json({
+    return res.status(401).json({
       massege: "input body data is empty",
     });
   }
@@ -22,7 +22,7 @@ async function signIn(req, res) {
   });
 
   if (!success) {
-    return res.status(403).json({
+    return res.status(406).json({
       massege: "input is invalid",
     });
   }
@@ -31,8 +31,9 @@ async function signIn(req, res) {
     const user = await Users.findOne({ email, password });
 
     if (!user) {
-      return res.status(403).json({
-        massege: "no user as been found or your password is wrong",
+      return res.status(401).json({
+        massege:
+          " There was a problem logging in. Check your email and password or create an account. ",
       });
     }
 
@@ -40,9 +41,9 @@ async function signIn(req, res) {
 
     const token = jwt.sign({ userId }, process.env.SECRET_KEY);
 
-    res.status(400).json({
+    res.status(201).json({
       token,
-      user: { username: user.username, email: user.email },
+      user: { username: user.username },
     });
   } catch (error) {
     console.log(error);

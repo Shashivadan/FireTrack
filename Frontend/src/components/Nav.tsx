@@ -28,7 +28,9 @@ function Nav() {
         <div>
           <div className="relative">
             <div className=" absolute md:flex md:items-center gap-6 mt-3 ">
-              <h1 className={`hidden md:block font-bold text-2xl cursor-auto `}>
+              <h1
+                className={`hidden md:block font-bold text-2xl cursor-auto  hover:scale-90 hover:duration-500 duration-500`}
+              >
                 FireTrack
               </h1>
               <h1

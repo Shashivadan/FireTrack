@@ -40,6 +40,9 @@ function Signin() {
       setError("root", {
         message: error?.response?.data?.massege,
       });
+      setError("root", {
+        message: "Some thing wrong with server please try after some time",
+      });
     }
   };
 
