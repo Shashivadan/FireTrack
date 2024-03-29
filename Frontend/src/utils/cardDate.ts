@@ -1,10 +1,10 @@
-interface FeatureTypes {
+type FeatureTypes = {
   svgPath: string;
   title: string;
   description: string;
   id: number;
   viweBox: string;
-}
+};
 
 const featuresList: FeatureTypes[] = [
   {
@@ -59,4 +59,6 @@ const featuresList: FeatureTypes[] = [
   },
 ];
 
-export { featuresList, FeatureTypes };
+export default FeatureTypes;
+
+export { featuresList };

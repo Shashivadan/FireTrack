@@ -69,28 +69,28 @@ function HeroModel() {
     <>
       <div className="w-full md:max-w-screen-xl m-auto">
         <Nav />
-        <div className=" h-[calc(100vh-60px)]">
-          <div className=" w-full h-full flex flex-col justify-center items-center ">
+        <div className="h-[calc(100vh-60px)]">
+          <div className="w-full h-full flex flex-col justify-center items-center ">
             <form
-              className=" w-[350px] flex flex-col gap-3 p-4"
+              className="w-[350px] flex flex-col gap-3 p-4"
               onSubmit={handleSubmit(onSubmit)}
               action=""
             >
-              <h1 className=" text-center text-lg font-[600] ">
+              <h1 className="text-center text-lg font-[600] ">
                 Enter The Conditions
               </h1>
               <Input
                 {...register("temperature")}
-                className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+                className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
                 placeholder="name@example.com"
               />
-              <span className=" text-[0.9rem] text-red-900">
+              <span className="text-[0.9rem] text-red-900">
                 {errors.temperature && errors.temperature.message}
               </span>
               <Input
                 {...register("oxygen")}
-                className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+                className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
                 placeholder="name@example.com"
               />
@@ -99,11 +99,11 @@ function HeroModel() {
               </span>
               <Input
                 {...register("humidity")}
-                className="  border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+                className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
                 placeholder="name@example.com"
               />
-              <span className=" text-[0.9rem] text-red-900">
+              <span className="text-[0.9rem] text-red-900">
                 {errors.humidity && errors.humidity.message}
               </span>
               <Button

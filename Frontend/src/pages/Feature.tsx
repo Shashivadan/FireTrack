@@ -1,6 +1,7 @@
 import Card from "@/components/Card";
-import { featuresList, FeatureTypes } from "@/utils/cardDate";
+import { featuresList } from "@/utils/cardDate";
 import { Fragment } from "react/jsx-runtime";
+import FeatureTypes from "@/utils/cardDate";
 
 function Feature() {
   return (
