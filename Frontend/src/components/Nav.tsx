@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
+import { getAuthToken } from "@/utils/AxiosBaseUrl";
 
 function Nav() {
   const Navigate = useNavigate();
@@ -20,6 +21,7 @@ function Nav() {
   const handleSignOut = () => {
     sessionStorage.clear();
     Navigate("/");
+    getAuthToken();
     window.location.reload();
   };
   return (

@@ -4,9 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import axios from "@/utils/AxiosBaseUrl";
+import axios, { getAuthToken } from "@/utils/AxiosBaseUrl";
 import { useSetRecoilState } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
+import { Axios, AxiosError } from "axios";
 
 const schema = z.object({
   email: z.string().email({ message: "Enter valid your email" }),
@@ -35,6 +36,7 @@ function Signin() {
       sessionStorage.setItem("token", resData.token);
       sessionStorage.setItem("currentUser", resData.user.username);
       setCurrentUser(sessionStorage.getItem("currentUser"));
+      getAuthToken();
       Navigate("/");
     } catch (error: any) {
       setError("root", {

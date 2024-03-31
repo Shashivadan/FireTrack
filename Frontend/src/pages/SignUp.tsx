@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { getAuthToken } from "../utils/AxiosBaseUrl";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "@/utils/AxiosBaseUrl";
@@ -56,6 +57,7 @@ function SignUp() {
       sessionStorage.setItem("currentUser", responseData.user.username);
       sessionStorage.setItem("token", responseData.token);
       setCurrentUser(localStorage.getItem("currentUser"));
+      getAuthToken();
 
       Navigate("/");
     } catch (error: any) {

@@ -21,14 +21,13 @@ async function geminiApi(req, res) {
 
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
 
-    // For text-only input, use the gemini-pro model
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
 
-    res.status(200).json({
+    return res.status(200).json({
       text,
     });
   } catch (err) {

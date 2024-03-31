@@ -53,9 +53,6 @@ function HeroModel() {
           temperature,
           humidity,
         },
-        headers: {
-          token: "Bearer " + sessionStorage.getItem("token"),
-        },
       });
       reset();
       setResult(responseData.data.data);
