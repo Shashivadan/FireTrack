@@ -14,8 +14,8 @@ async function geminiApi(req, res) {
     });
 
     if (!success) {
-      return res.status(401).json({
-        message: "place provide some prompt",
+      return res.status(403).json({
+        message: "provide prompt ",
       });
     }
 

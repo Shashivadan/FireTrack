@@ -23,7 +23,7 @@ const schema = z
       .string()
       .min(4, { message: "password must contain 4 characters" }),
   })
-  .refine((date) => date.password === date.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
     message: "Passwords does not match",
   });

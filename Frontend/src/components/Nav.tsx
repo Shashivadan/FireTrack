@@ -43,7 +43,7 @@ function Nav() {
               </h1>
               <div
                 className={` ${
-                  toggle ? "block " : "hidden "
+                  toggle ? "block " : "hidden"
                 } mt-5  backdrop:mt-9 md:m-0 md:flex md:gap-3  z-10 `}
               >
                 <h1
@@ -63,17 +63,19 @@ function Nav() {
                 >
                   Features
                 </a>
+                {user && (
+                  <NavLink
+                    to={""}
+                    className=" m-4 md:m-0 block cursor-pointer  md:text-center text-slate-300 font-semibold text-[0.9rem] hover:text-white"
+                  >
+                    Assistance
+                  </NavLink>
+                )}
                 <NavLink
                   to={""}
                   className=" m-4 md:m-0 block cursor-pointer md:text-center text-slate-300 font-semibold text-[0.9rem] hover:text-white"
                 >
                   Doc
-                </NavLink>
-                <NavLink
-                  to={""}
-                  className=" m-4 md:m-0 block cursor-pointer  md:text-center text-slate-300 font-semibold text-[0.9rem] hover:text-white"
-                >
-                  Weather
                 </NavLink>
                 <div
                   onClick={handleSignOut}
