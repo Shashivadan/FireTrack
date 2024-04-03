@@ -23,10 +23,16 @@ async function geminiApi(req, res) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const result = await model.generateContent(prompt);
+    const chat = model.startChat({
+      history: [],
+      generationConfig: {
+        maxOutputTokens: 100,
+      },
+    });
+
+    const result = await chat.sendMessage(prompt);
     const response = await result.response;
     const text = response.text();
-
     return res.status(200).json({
       text,
     });

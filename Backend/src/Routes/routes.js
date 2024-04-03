@@ -16,6 +16,6 @@ router.post("/signup", signUp);
 
 // model route
 router.get("/model", authMiddleWare, model_api);
-router.post("/gemini", authMiddleWare, geminiApi);
+router.post("/gemini", geminiApi);
 
 export { router };
