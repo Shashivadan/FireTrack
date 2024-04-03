@@ -7,7 +7,7 @@ import { z } from "zod";
 import axios, { getAuthToken } from "@/utils/AxiosBaseUrl";
 import { useSetRecoilState } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
-import { Axios, AxiosError } from "axios";
+import { isAxiosError } from "axios";
 
 const schema = z.object({
   email: z.string().email({ message: "Enter valid your email" }),
@@ -38,10 +38,12 @@ function Signin() {
       setCurrentUser(sessionStorage.getItem("currentUser"));
       getAuthToken();
       Navigate("/");
-    } catch (error: any) {
-      setError("root", {
-        message: error?.response?.data?.massege,
-      });
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        setError("root", {
+          message: error?.response?.data?.massege,
+        });
+      }
       setError("root", {
         message: "Some thing wrong with server please try after some time",
       });
