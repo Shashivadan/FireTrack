@@ -9,6 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import useComponentSpanRender from "@/hooks/useComponentSpanRender";
+import { isAxiosError } from "axios";
 
 type PropType = {
   status: string;
@@ -56,9 +57,11 @@ function HeroModel() {
       });
       reset();
       setResult(responseData.data.data);
-    } catch (error) {
+    } catch (error: unknown) {
       console.log(error);
-      setError("root", { message: "Some thing went wrong" });
+      if (isAxiosError(error)) {
+        setError("root", { message: "Some thing went wrong" });
+      }
     }
   };
 
@@ -77,6 +80,7 @@ function HeroModel() {
                 Enter The Conditions
               </h1>
               <Input
+                min="0"
                 {...register("temperature")}
                 className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
@@ -86,6 +90,7 @@ function HeroModel() {
                 {errors.temperature && errors.temperature.message}
               </span>
               <Input
+                min={"0"}
                 {...register("oxygen")}
                 className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
@@ -95,6 +100,7 @@ function HeroModel() {
                 {errors.oxygen && errors.oxygen.message}
               </span>
               <Input
+                min={"0"}
                 {...register("humidity")}
                 className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
