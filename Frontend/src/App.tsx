@@ -5,6 +5,7 @@ import Signin from "./pages/Signin";
 import SignUp from "./pages/SignUp";
 import HeroModel from "./pages/HeroModel";
 import PrivateRoute from "./routes/PrivateRoute";
+import Assistanse from "./pages/Assistanse";
 
 function App() {
   return (
@@ -20,6 +21,14 @@ function App() {
             element={
               <PrivateRoute>
                 <HeroModel />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/assistance"
+            element={
+              <PrivateRoute>
+                <Assistanse />
               </PrivateRoute>
             }
           />

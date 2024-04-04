@@ -65,7 +65,7 @@ function Nav() {
                 </a>
                 {user && (
                   <NavLink
-                    to={""}
+                    to={"/assistance"}
                     className=" m-4 md:m-0 block cursor-pointer  md:text-center text-slate-300 font-semibold text-[0.9rem] hover:text-white"
                   >
                     Assistance
