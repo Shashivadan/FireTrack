@@ -19,6 +19,7 @@ function Assistanse() {
   const [userInput, setuserInput] = useState<string | undefined>("");
 
   const onClickHandler = async () => {
+    setChat("");
     try {
       const res = await axios.post("api/v1/gemini", {
         prompt: userInput,
@@ -40,7 +41,7 @@ function Assistanse() {
           <div className=" min-h-[85vh] flex flex-col justify-end w-full bg-slate-800 rounded-2xl p-3">
             <div className="h-fit min-h-[90%]  w-full  p-6">
               <div className=" font-semibold bg-slate-600 p-2 rounded-lg ">
-                model : {chat}
+                model : {chat ? chat : "loading"}
               </div>
             </div>
             <div className=" h-[10%] flex justify-center gap-2 items-center mx-2 md:px-2">

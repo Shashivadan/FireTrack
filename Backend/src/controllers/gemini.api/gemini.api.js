@@ -20,7 +20,7 @@ async function geminiApi(req, res) {
     }
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(`${prompt} in a paragraph`);
     const response = await result.response;
     const text = response.text();
 
