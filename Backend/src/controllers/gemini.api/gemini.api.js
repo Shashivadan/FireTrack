@@ -18,21 +18,12 @@ async function geminiApi(req, res) {
         message: "provide prompt ",
       });
     }
-
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
-
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-    const chat = model.startChat({
-      history: [],
-      generationConfig: {
-        maxOutputTokens: 100,
-      },
-    });
-
-    const result = await chat.sendMessage(prompt);
+    const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
+
     return res.status(200).json({
       text,
     });

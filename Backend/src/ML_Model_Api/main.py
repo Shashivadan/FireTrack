@@ -24,10 +24,10 @@ async def predict_forest(temperature: int, oxygen: int, humidity: int):
     probability_of_fire = prediction[0][1]
 
     if probability_of_fire > 0.5 :
-        status = "Your Forest is in Danger."
+        status = "Forest is in Danger."
         Boolean = True
     else:
-        status = "Your Forest is safe."
+        status = "Forest is safe."
         Boolean = False
     
     result = {

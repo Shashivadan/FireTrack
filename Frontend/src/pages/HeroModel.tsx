@@ -84,7 +84,7 @@ function HeroModel() {
                 {...register("temperature")}
                 className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
-                placeholder="name@example.com"
+                placeholder="Temperature"
               />
               <span className="text-[0.9rem] text-red-900">
                 {errors.temperature && errors.temperature.message}
@@ -94,7 +94,7 @@ function HeroModel() {
                 {...register("oxygen")}
                 className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
-                placeholder="name@example.com"
+                placeholder="Oxygen"
               />
               <span className=" text-[0.9rem] text-red-900">
                 {errors.oxygen && errors.oxygen.message}
@@ -104,7 +104,7 @@ function HeroModel() {
                 {...register("humidity")}
                 className="border-slate-600 rounded-md px-3 py-2 text-sm h-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
                 type="number"
-                placeholder="name@example.com"
+                placeholder="Humidity"
               />
               <span className="text-[0.9rem] text-red-900">
                 {errors.humidity && errors.humidity.message}
@@ -113,7 +113,7 @@ function HeroModel() {
                 type="submit"
                 className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
               >
-                Submit
+                Predict
               </Button>
               <span className=" text-[0.9rem] text-red-900">
                 {errors.root && errors.root.message}

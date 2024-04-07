@@ -31,7 +31,10 @@ function Signin() {
   const onSubmit = async (data: SchemaType) => {
     const { email, password } = data;
     try {
-      const response = await axios.post("api/v1/signin", { email, password });
+      const response = await axios.post("api/v1/signin", {
+        email,
+        password,
+      });
       const resData = await response.data;
       sessionStorage.setItem("token", resData.token);
       sessionStorage.setItem("currentUser", resData.user.username);
