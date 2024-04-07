@@ -16,7 +16,7 @@ function Card({ svgpath, title, description, id, viweBox }: Inputpropes) {
           <path fillRule="evenodd" d={svgpath}></path>
         </svg>
         <h1 className=" text-[1rem] font-[700] mt-2">{title}</h1>
-        <p className=" text-slate-400 text-base text-clip">{description}</p>
+        <p className="text-slate-400 text-base text-clip">{description}</p>
       </div>
     </Fragment>
   );

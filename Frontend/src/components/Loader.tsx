@@ -1,16 +1,19 @@
-import { Skeleton } from "./ui/skeleton";
+import { DNA } from "react-loader-spinner";
 
 function Loader() {
   return (
-    <div>
-      <div className="flex items-center space-x-4">
-        <Skeleton className="h-12 w-12 rounded-full" />
-        <div className="space-y-2">
-          <Skeleton className="h-4 w-[250px]" />
-          <Skeleton className="h-4 w-[200px]" />
-        </div>
+    <>
+      <div className=" w-full h-screen grid items-center bg-blue-950">
+        <DNA
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
       </div>
-    </div>
+    </>
   );
 }
 
