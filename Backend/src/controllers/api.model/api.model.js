@@ -1,5 +1,6 @@
 import zod from "zod";
 import axios from "axios";
+import Records from "../../models/Records.js";
 
 const attributeValuditer = zod.object({
   temperature: zod.string(),
@@ -36,8 +37,16 @@ async function model_api(req, res) {
         humidity,
       },
     });
-
     const data = await resp.data;
+
+    const newRecord = await Records.create({
+      userId: req.userId,
+      temperature: temperature,
+      oxygen: oxygen,
+      humidity: humidity,
+      probability: data.probability,
+      danger: data.value,
+    });
 
     return res.status(200).json({
       data,
