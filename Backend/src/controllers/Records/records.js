@@ -3,7 +3,6 @@ import Records from "../../models/Records.js";
 async function displayRecords(req, res) {
   try {
     const userId = req.userId;
-    console.log(userId);
     const records = await Records.find({ userId: userId });
     return res.status(200).json({
       records: records.map((record) => {

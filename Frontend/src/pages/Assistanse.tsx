@@ -35,7 +35,7 @@ function Assistanse() {
 
   return (
     <>
-      <div className="w-full md:min-w-screen-xl m-auto px-3 md:px-2">
+      <div className="w-full md:max-w-screen-xl m-auto px-3 md:px-2">
         <Nav />
         <div className=" min-h-[calc(100vh-60px)] p-6">
           <div className=" min-h-[85vh] flex flex-col justify-end w-full bg-slate-800 rounded-2xl p-3">

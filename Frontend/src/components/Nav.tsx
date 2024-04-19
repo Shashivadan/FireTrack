@@ -71,6 +71,14 @@ function Nav() {
                     Assistance
                   </NavLink>
                 )}
+                {user && (
+                  <NavLink
+                    to={"/logs"}
+                    className=" m-4 md:m-0 block cursor-pointer  md:text-center text-slate-300 font-semibold text-[0.9rem] hover:text-white"
+                  >
+                    Logs
+                  </NavLink>
+                )}
                 <NavLink
                   to={""}
                   className=" m-4 md:m-0 block cursor-pointer md:text-center text-slate-300 font-semibold text-[0.9rem] hover:text-white"

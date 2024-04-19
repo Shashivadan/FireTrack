@@ -1,19 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-// import Home from "./pages/Home";
-// import Signin from "./pages/Signin";
-// import SignUp from "./pages/SignUp";
-// import HeroModel from "./pages/HeroModel";
 import PrivateRoute from "./routes/PrivateRoute";
-// import Assistanse from "./pages/Assistanse";
 import { lazy, Suspense } from "react";
-// import Signin from "./pages/Signin";
 import Loader from "./components/Loader";
-
 const SignUp = lazy(() => import("@/pages/SignUp"));
 const Home = lazy(() => import("@/pages/Home"));
 const HeroModel = lazy(() => import("@/pages/HeroModel"));
 const Assistanse = lazy(() => import("@/pages/Assistanse"));
 const Signin = lazy(() => import("@/pages/Signin"));
+const Logs = lazy(() => import("@/pages/Logs"));
 
 function App() {
   return (
@@ -65,6 +59,17 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/logs"
+            element={
+              <PrivateRoute>
+                <Suspense fallback={<Loader />}>
+                  <Logs />
+                </Suspense>
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Loader />} />
         </Routes>
       </div>
     </>
