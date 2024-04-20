@@ -11,8 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import axios from "@/utils/AxiosBaseUrl";
 import { isAxiosError } from "axios";
-import { it } from "node:test";
-
 // temperature: record.temperature,
 // oxygen: record.oxygen,
 // humidity: record.humidity,
@@ -81,12 +79,12 @@ function Logs() {
                         <TableCell>{item.humidity}</TableCell>
                         <TableCell>
                           {item.danger ? (
-                            <div className=" bg-red-500  text-center px-2  rounded-full">
-                              fire
+                            <div className=" bg-red-500  text-center px-2  rounded-full font-bold">
+                              Danger
                             </div>
                           ) : (
-                            <div className=" bg-green-500  text-center px-2  rounded-full">
-                              safe
+                            <div className=" bg-green-500  text-center px-2  rounded-full font-bold">
+                              Safe
                             </div>
                           )}
                         </TableCell>
