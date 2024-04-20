@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "@/utils/AxiosBaseUrl";
 import { isAxiosError } from "axios";
+import { it } from "node:test";
 
 // temperature: record.temperature,
 // oxygen: record.oxygen,
@@ -30,15 +31,14 @@ type DataType = {
 };
 
 function Logs() {
-  const [data, setData] = useState<DataType[] | null>();
+  const [data, setData] = useState<DataType[] | null>(null);
 
   useEffect(() => {
     async function logData() {
-      const res = await axios.post("api/v1/records");
-      const resData = await res.data;
-      console.log(resData);
-
       try {
+        const res = await axios.post("api/v1/records");
+        const resData = await res.data.records;
+        setData(resData);
       } catch (error: unknown) {
         if (isAxiosError(error)) {
           console.log(error);
@@ -46,9 +46,10 @@ function Logs() {
         console.log(error);
       }
     }
-    logData();
+    if (!data) {
+      logData();
+    }
   }, []);
-
   return (
     <>
       <div className="w-full md:max-w-screen-xl m-auto px-3 md:px-2">
@@ -59,23 +60,52 @@ function Logs() {
               <TableCaption>A list of your recent logs.</TableCaption>
               <TableHeader>
                 <TableRow>
-                  <TableHead>temperature</TableHead>
-                  <TableHead>oxygen</TableHead>
-                  <TableHead>humidity</TableHead>
-                  <TableHead>danger</TableHead>
-                  <TableHead>probability</TableHead>
+                  <TableHead>Temperature</TableHead>
+                  <TableHead>Oxygen</TableHead>
+                  <TableHead>Humidity</TableHead>
+                  <TableHead>Danger</TableHead>
+                  <TableHead>Probability</TableHead>
+                  <TableHead>Date</TableHead>
                   <TableHead>Time</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">INV001</TableCell>
-                  <TableCell>Paid</TableCell>
-                  <TableCell>Credit Card</TableCell>
-                  <TableCell>$250.00</TableCell>
-                  <TableCell>$250.00</TableCell>
-                  <TableCell>$250.00</TableCell>
-                </TableRow>
+                {data ? (
+                  data.map((item: DataType) => {
+                    return (
+                      <TableRow key={item._id} className="">
+                        <TableCell className="font-medium">
+                          {item.temperature}
+                        </TableCell>
+                        <TableCell>{item.oxygen}</TableCell>
+                        <TableCell>{item.humidity}</TableCell>
+                        <TableCell>
+                          {item.danger ? (
+                            <div className=" bg-red-500  text-center px-2  rounded-full">
+                              fire
+                            </div>
+                          ) : (
+                            <div className=" bg-green-500  text-center px-2  rounded-full">
+                              safe
+                            </div>
+                          )}
+                        </TableCell>
+                        <TableCell>{item.probability}</TableCell>
+                        <TableCell>{item.createdAt.slice(0, 10)}</TableCell>
+                        <TableCell>{item.createdAt.slice(11, 18)}</TableCell>
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell>loading</TableCell>
+                    <TableCell>loading</TableCell>
+                    <TableCell>loading</TableCell>
+                    <TableCell>loading</TableCell>
+                    <TableCell>loading</TableCell>
+                    <TableCell>loading</TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </div>
