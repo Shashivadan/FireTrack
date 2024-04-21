@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "@/utils/AxiosBaseUrl";
 import { useSetRecoilState } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
+import { toast } from "sonner";
 
 const schema = z
   .object({
@@ -58,9 +59,10 @@ function SignUp() {
       sessionStorage.setItem("token", responseData.token);
       setCurrentUser(localStorage.getItem("currentUser"));
       getAuthToken();
-
       Navigate("/");
+      toast.success("sign up successful");
     } catch (error: any) {
+      toast.error("sign up failed");
       if (error?.response?.data?.massege) {
         setError("root", { message: error?.response?.data?.massege });
         return;

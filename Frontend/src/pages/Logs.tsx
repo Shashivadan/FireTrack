@@ -96,12 +96,12 @@ function Logs() {
                   })
                 ) : (
                   <TableRow>
-                    <TableCell>loading</TableCell>
-                    <TableCell>loading</TableCell>
-                    <TableCell>loading</TableCell>
-                    <TableCell>loading</TableCell>
-                    <TableCell>loading</TableCell>
-                    <TableCell>loading</TableCell>
+                    <TableCell>Empty</TableCell>
+                    <TableCell>Empty</TableCell>
+                    <TableCell>Empty</TableCell>
+                    <TableCell>Empty</TableCell>
+                    <TableCell>Empty</TableCell>
+                    <TableCell>Empty</TableCell>
                   </TableRow>
                 )}
               </TableBody>

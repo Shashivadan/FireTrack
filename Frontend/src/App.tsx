@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
+import { Toaster } from "sonner";
 const SignUp = lazy(() => import("@/pages/SignUp"));
 const Home = lazy(() => import("@/pages/Home"));
 const HeroModel = lazy(() => import("@/pages/HeroModel"));
@@ -12,6 +13,7 @@ const Logs = lazy(() => import("@/pages/Logs"));
 function App() {
   return (
     <>
+      <Toaster richColors />
       <div className=" bg-[#030711] text-white ">
         <Routes>
           <Route

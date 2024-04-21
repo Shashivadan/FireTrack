@@ -8,6 +8,7 @@ import axios, { getAuthToken } from "@/utils/AxiosBaseUrl";
 import { useSetRecoilState } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
 import { isAxiosError } from "axios";
+import { toast } from "sonner";
 
 const schema = z.object({
   email: z.string().email({ message: "Enter valid your email" }),
@@ -37,11 +38,14 @@ function Signin() {
       });
       const resData = await response.data;
       sessionStorage.setItem("token", resData.token);
+      localStorage.setItem("token", resData.token);
       sessionStorage.setItem("currentUser", resData.user.username);
       setCurrentUser(sessionStorage.getItem("currentUser"));
       getAuthToken();
+      toast.success("sign in successful");
       Navigate("/");
     } catch (error: unknown) {
+      toast.error("sign in failed");
       if (isAxiosError(error)) {
         setError("root", {
           message: error?.response?.data?.massege,

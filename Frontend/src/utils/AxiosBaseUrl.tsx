@@ -1,9 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 
+const token = sessionStorage.getItem("token");
 const Instance: AxiosInstance = axios.create({
   baseURL: "http://localhost:3000/",
   headers: {
-    token: `Bearer ${sessionStorage.getItem("token")}`,
+    token: "Bearer " + token,
   },
 });
 

@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
+  function handleClick() {
+    navigate("/froestprediction");
+    window.location.reload();
+  }
   return (
     <>
       <div className=" scrollbar-none text-stone-50 w-full scroll-smooth">
@@ -23,7 +27,7 @@ export default function Home() {
               </p>
               <div className=" mt-5 flex gap-2">
                 <Button
-                  onClick={() => navigate("/froestprediction")}
+                  onClick={handleClick}
                   className=" bg-white text-black text-[1rem] font-medium px-6 py-4  hover:bg-zinc-300 "
                 >
                   Get Started

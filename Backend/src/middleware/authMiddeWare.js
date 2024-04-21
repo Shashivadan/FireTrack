@@ -16,7 +16,7 @@ function authMiddleWare(req, res, next) {
 
     if (!decode) {
       return res.status(403).json({
-        message: "some thing worng sorry",
+        message: "some thing worng sorry decode",
         decode,
       });
     }

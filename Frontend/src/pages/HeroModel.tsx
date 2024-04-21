@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import useComponentSpanRender from "@/hooks/useComponentSpanRender";
 import { isAxiosError } from "axios";
+import { toast } from "sonner";
 
 type PropType = {
   status: string;
@@ -57,10 +58,12 @@ function HeroModel() {
       });
       reset();
       setResult(responseData.data.data);
+      toast.success("sussesfull");
     } catch (error: unknown) {
+      toast.error("failed");
       console.log(error);
       if (isAxiosError(error)) {
-        setError("root", { message: "Some thing went wrong" });
+        setError("root", { message: "Some thing went wrong 1" });
       }
     }
   };
