@@ -68,27 +68,30 @@ function HeroModel() {
   };
 
   const handleAutoPredict = () => {
-    if (!navigator.geolocation) {
-      return toast.error("Geolocation not supported")
-    }
+    try {
+      if (!navigator.geolocation) {
+        return toast.error("Geolocation not supported")
+      }
 
-    navigator.geolocation.getCurrentPosition(success, error);
-    async function success(position: GeolocationPosition) {
-      const latitude: number = position.coords.latitude;
-      const longitude: number = position.coords.longitude;
-      const response = await axios.get("/api/v1/autoperdiction", {
-        params: {
-          lat: latitude,
-          lon: longitude
-        }
-      })
-      setResult(response.data.result)
-      toast.success("sussesfull")
+      navigator.geolocation.getCurrentPosition(success, error);
+      async function success(position: GeolocationPosition) {
+        const latitude: number = position.coords.latitude;
+        const longitude: number = position.coords.longitude;
+        const response = await axios.get("/api/v1/autoperdiction", {
+          params: {
+            lat: latitude,
+            lon: longitude
+          }
+        })
+        setResult(response.data.result)
+        toast.success("sussesfull")
+      }
+      function error() {
+        toast.error("location not avaialbe")
+      }
+    } catch (error) {
+      return toast.error("some thing went worng")
     }
-    function error() {
-      console.log("location not avaialbe ")
-    }
-
 
   }
 
