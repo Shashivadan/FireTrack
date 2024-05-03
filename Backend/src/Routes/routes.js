@@ -8,6 +8,7 @@ import { authMiddleWare } from "../middleware/authMiddeWare.js";
 import { model_api } from "../controllers/api.model/api.model.js";
 import geminiApi from "../controllers/gemini.api/gemini.api.js";
 import displayRecords from "../controllers/Records/records.js";
+import { automaticPrediction, weatherApi } from "../controllers/weather.api/weather.api.js";
 
 const router = Router();
 
@@ -21,5 +22,12 @@ router.post("/gemini", geminiApi);
 
 // display user records
 router.post("/records", authMiddleWare, displayRecords);
+
+//automatic process
+router.get("/weather", weatherApi);
+router.get("/autoperdiction", authMiddleWare, automaticPrediction)
+
+
+
 
 export { router };

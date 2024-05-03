@@ -48,6 +48,8 @@ async function model_api(req, res) {
       danger: data.value,
     });
 
+    if (!newRecord) return res.status(403).json({ message: "A New Record Not Created" })
+
     return res.status(200).json({
       data,
     });

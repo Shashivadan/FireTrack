@@ -5,7 +5,7 @@ function authMiddleWare(req, res, next) {
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     res.status(403).json({
-      message: "token is not found or unauthorized1",
+      message: "token is not found or unauthorized",
     });
   }
 

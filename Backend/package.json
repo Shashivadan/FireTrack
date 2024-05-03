@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --env-file .env index.js"
+    "dev": "nodemon --env-file=.env index.js"
   },
   "author": "",
   "license": "ISC",
