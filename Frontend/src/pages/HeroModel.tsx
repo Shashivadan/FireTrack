@@ -48,7 +48,6 @@ function HeroModel() {
   const onSubmit = async (data: FormTypes) => {
     try {
       const { oxygen, temperature, humidity }: FormTypes = data;
-
       const responseData = await axios.get("/api/v1/model", {
         params: {
           oxygen,
@@ -67,6 +66,31 @@ function HeroModel() {
       }
     }
   };
+
+  const handleAutoPredict = () => {
+    if (!navigator.geolocation) {
+      return toast.error("Geolocation not supported")
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+    async function success(position: GeolocationPosition) {
+      const latitude: number = position.coords.latitude;
+      const longitude: number = position.coords.longitude;
+      const response = await axios.get("/api/v1/autoperdiction", {
+        params: {
+          lat: latitude,
+          lon: longitude
+        }
+      })
+      setResult(response.data.result)
+      toast.success("sussesfull")
+    }
+    function error() {
+      console.log("location not avaialbe ")
+    }
+
+
+  }
 
   return (
     <>
@@ -114,10 +138,16 @@ function HeroModel() {
               </span>
               <Button
                 type="submit"
-                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
-              >
+                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]">
                 Predict
               </Button>
+              <Button
+                type="button"
+                onClick={handleAutoPredict}
+                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]">
+                Auto-Predict
+              </Button>
+
               <span className=" text-[0.9rem] text-red-900">
                 {errors.root && errors.root.message}
               </span>
