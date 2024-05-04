@@ -72,7 +72,6 @@ function HeroModel() {
       if (!navigator.geolocation) {
         return toast.error("Geolocation not supported")
       }
-
       navigator.geolocation.getCurrentPosition(success, error);
       async function success(position: GeolocationPosition) {
         const latitude: number = position.coords.latitude;
@@ -89,10 +88,9 @@ function HeroModel() {
       function error() {
         toast.error("location not avaialbe")
       }
-    } catch (error) {
+    } catch (error: unknown) {
       return toast.error("some thing went worng")
     }
-
   }
 
   return (
