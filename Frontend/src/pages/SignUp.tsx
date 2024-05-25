@@ -61,6 +61,7 @@ function SignUp() {
       getAuthToken();
       Navigate("/");
       toast.success("sign up successful");
+      window.location.reload()
     } catch (error: any) {
       toast.error("sign up failed");
       if (error?.response?.data?.massege) {

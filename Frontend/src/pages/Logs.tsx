@@ -8,10 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "@/utils/AxiosBaseUrl";
 import { isAxiosError } from "axios";
-// temperature: record.temperature,
 // oxygen: record.oxygen,
 // humidity: record.humidity,
 // danger: record.danger,

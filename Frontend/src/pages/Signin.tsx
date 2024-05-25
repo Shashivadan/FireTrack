@@ -44,15 +44,17 @@ function Signin() {
       getAuthToken();
       toast.success("sign in successful");
       Navigate("/");
+      window.location.reload();
     } catch (error: unknown) {
       toast.error("sign in failed");
       if (isAxiosError(error)) {
         setError("root", {
           message: error?.response?.data?.massege,
         });
+        return;
       }
       setError("root", {
-        message: "Some thing wrong with server please try after some time",
+        message: "Some Thing Went Wrong : " + error,
       });
     }
   };

@@ -57,12 +57,12 @@ function HeroModel() {
       });
       reset();
       setResult(responseData.data.data);
-      toast.success("sussesfull");
+      toast.success("Sussesfull");
     } catch (error: unknown) {
       toast.error("failed");
       console.log(error);
       if (isAxiosError(error)) {
-        setError("root", { message: "Some thing went wrong 1" });
+        setError("root", { message: "Some Thing Went Wrong" });
       }
     }
   };
@@ -70,7 +70,7 @@ function HeroModel() {
   const handleAutoPredict = () => {
     try {
       if (!navigator.geolocation) {
-        return toast.error("Geolocation not supported")
+        return toast.error("Geolocation not supported");
       }
       navigator.geolocation.getCurrentPosition(success, error);
       async function success(position: GeolocationPosition) {
@@ -79,19 +79,19 @@ function HeroModel() {
         const response = await axios.get("/api/v1/autoperdiction", {
           params: {
             lat: latitude,
-            lon: longitude
-          }
-        })
-        setResult(response.data.result)
-        toast.success("sussesfull")
+            lon: longitude,
+          },
+        });
+        setResult(response.data.result);
+        toast.success("sussesfull");
       }
       function error() {
-        toast.error("location not avaialbe")
+        toast.error("location not avaialbe");
       }
     } catch (error: unknown) {
-      return toast.error("some thing went worng")
+      return toast.error("some thing went worng");
     }
-  }
+  };
 
   return (
     <>
@@ -139,13 +139,15 @@ function HeroModel() {
               </span>
               <Button
                 type="submit"
-                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]">
+                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
+              >
                 Predict
               </Button>
               <Button
                 type="button"
                 onClick={handleAutoPredict}
-                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]">
+                className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
+              >
                 Auto-Predict
               </Button>
 
@@ -154,12 +156,14 @@ function HeroModel() {
               </span>
             </form>
             <div className="w-[70%] md:w-[50%]">
-              {result && componentRenter && (
+              {result && componentRenter ? (
                 <Warning
                   probability={result.probability}
                   status={result.status}
                   value={result.value}
                 />
+              ) : (
+                <></>
               )}
             </div>
           </div>

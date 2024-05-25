@@ -4,12 +4,15 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Home() {
   const navigate = useNavigate();
   function handleClick() {
+    if (!sessionStorage.getItem("token")) {
+      return toast.warning("Signin before continuing");
+    }
     navigate("/froestprediction");
-    window.location.reload();
   }
   return (
     <>
