@@ -10,6 +10,8 @@ import axios from "@/utils/AxiosBaseUrl";
 import { useSetRecoilState } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
 import { toast } from "sonner";
+import { useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 const schema = z
   .object({
@@ -32,6 +34,7 @@ const schema = z
 type FormFields = z.infer<typeof schema>;
 
 function SignUp() {
+  const [isLoading, setIsLoading] = useState<boolean>();
   const setCurrentUser = useSetRecoilState(globleUserAtom);
   const Navigate = useNavigate();
   const {
@@ -46,6 +49,7 @@ function SignUp() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
+      setIsLoading(true);
       const { username, password, email } = data;
       const response = await axios.post("api/v1/signup", {
         username,
@@ -58,11 +62,14 @@ function SignUp() {
       sessionStorage.setItem("currentUser", responseData.user.username);
       sessionStorage.setItem("token", responseData.token);
       setCurrentUser(localStorage.getItem("currentUser"));
+
       getAuthToken();
+      setIsLoading(false);
       Navigate("/");
       toast.success("sign up successful");
-      window.location.reload()
+      window.location.reload();
     } catch (error: any) {
+      setIsLoading(false);
       toast.error("sign up failed");
       if (error?.response?.data?.massege) {
         setError("root", { message: error?.response?.data?.massege });
@@ -149,7 +156,22 @@ function SignUp() {
                   type="submit"
                   className="h-10 w-full font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
                 >
-                  Sign Up with Email
+                  {isLoading ? (
+                    <>
+                      {" "}
+                      <Oval
+                        visible={true}
+                        height="20"
+                        width="20"
+                        color="#000000"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                      />
+                    </>
+                  ) : (
+                    <> Sign Up with Email</>
+                  )}
                 </Button>
               </div>
               <p className="text-sm text-red-900 ">{errors.root?.message}</p>

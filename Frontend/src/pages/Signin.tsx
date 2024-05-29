@@ -9,7 +9,8 @@ import { useSetRecoilState } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
-
+import { useState } from "react";
+import { Oval } from "react-loader-spinner";
 const schema = z.object({
   email: z.string().email({ message: "Enter valid your email" }),
   password: z
@@ -28,8 +29,9 @@ function Signin() {
     handleSubmit,
     setError,
   } = useForm<SchemaType>({ resolver: zodResolver(schema) });
-
+  const [isLoading, setIsLoading] = useState<boolean>();
   const onSubmit = async (data: SchemaType) => {
+    setIsLoading(true);
     const { email, password } = data;
     try {
       const response = await axios.post("api/v1/signin", {
@@ -42,10 +44,12 @@ function Signin() {
       sessionStorage.setItem("currentUser", resData.user.username);
       setCurrentUser(sessionStorage.getItem("currentUser"));
       getAuthToken();
+      setIsLoading(false);
       toast.success("sign in successful");
       Navigate("/");
       window.location.reload();
     } catch (error: unknown) {
+      setIsLoading(false);
       toast.error("sign in failed");
       if (isAxiosError(error)) {
         setError("root", {
@@ -119,7 +123,22 @@ function Signin() {
               type="submit"
               className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
             >
-              Sign In with Email
+              {isLoading ? (
+                <>
+                  {" "}
+                  <Oval
+                    visible={true}
+                    height="20"
+                    width="20"
+                    color="#000000"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                </>
+              ) : (
+                <>Sign In with Email</>
+              )}
             </Button>
             <p className=" text-center text-sm text-red-800">
               {errors.root && errors.root?.message}

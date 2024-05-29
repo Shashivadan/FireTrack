@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Nav from "@/components/Nav";
 import Warning from "@/components/Warning";
 import { useForm } from "react-hook-form";
-
+import { Oval } from "react-loader-spinner";
 import axios from "@/utils/AxiosBaseUrl";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,6 +37,7 @@ type FormTypes = z.infer<typeof ParameterSchema>;
 function HeroModel() {
   const [result, setResult] = useState<null | PropType>();
   const componentRenter = useComponentSpanRender(result);
+  const [isLoading, setIsLoading] = useState<boolean>();
   const {
     register,
     handleSubmit,
@@ -46,6 +47,7 @@ function HeroModel() {
   } = useForm<FormTypes>({ resolver: zodResolver(ParameterSchema) });
 
   const onSubmit = async (data: FormTypes) => {
+    setIsLoading(true);
     try {
       const { oxygen, temperature, humidity }: FormTypes = data;
       const responseData = await axios.get("/api/v1/model", {
@@ -57,6 +59,7 @@ function HeroModel() {
       });
       reset();
       setResult(responseData.data.data);
+      setIsLoading(false);
       toast.success("Sussesfull");
     } catch (error: unknown) {
       toast.error("failed");
@@ -67,31 +70,31 @@ function HeroModel() {
     }
   };
 
-  const handleAutoPredict = () => {
-    try {
-      if (!navigator.geolocation) {
-        return toast.error("Geolocation not supported");
-      }
-      navigator.geolocation.getCurrentPosition(success, error);
-      async function success(position: GeolocationPosition) {
-        const latitude: number = position.coords.latitude;
-        const longitude: number = position.coords.longitude;
-        const response = await axios.get("/api/v1/autoperdiction", {
-          params: {
-            lat: latitude,
-            lon: longitude,
-          },
-        });
-        setResult(response.data.result);
-        toast.success("sussesfull");
-      }
-      function error() {
-        toast.error("location not avaialbe");
-      }
-    } catch (error: unknown) {
-      return toast.error("some thing went worng");
-    }
-  };
+  // const handleAutoPredict = () => {
+  //   try {
+  //     if (!navigator.geolocation) {
+  //       return toast.error("Geolocation not supported");
+  //     }
+  //     navigator.geolocation.getCurrentPosition(success, error);
+  //     async function success(position: GeolocationPosition) {
+  //       const latitude: number = position.coords.latitude;
+  //       const longitude: number = position.coords.longitude;
+  //       const response = await axios.get("/api/v1/autoperdiction", {
+  //         params: {
+  //           lat: latitude,
+  //           lon: longitude,
+  //         },
+  //       });
+  //       setResult(response.data.result);
+  //       toast.success("sussesfull");
+  //     }
+  //     function error() {
+  //       toast.error("location not avaialbe");
+  //     }
+  //   } catch (error: unknown) {
+  //     return toast.error("some thing went worng");
+  //   }
+  // };
 
   return (
     <>
@@ -141,15 +144,29 @@ function HeroModel() {
                 type="submit"
                 className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
               >
-                Predict
+                {isLoading ? (
+                  <>
+                    <Oval
+                      visible={true}
+                      height="20"
+                      width="20"
+                      color="#000000"
+                      ariaLabel="oval-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                  </>
+                ) : (
+                  <>Predict</>
+                )}
               </Button>
-              <Button
+              {/* <Button
                 type="button"
                 onClick={handleAutoPredict}
                 className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
               >
                 Auto-Predict
-              </Button>
+              </Button> */}
 
               <span className=" text-[0.9rem] text-red-900">
                 {errors.root && errors.root.message}
