@@ -1,6 +1,6 @@
 import pickle
-import numpy
 from fastapi import FastAPI, HTTPException
+import numpy
 import uvicorn
 
 app = FastAPI()

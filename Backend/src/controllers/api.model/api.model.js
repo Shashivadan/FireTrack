@@ -30,13 +30,16 @@ async function model_api(req, res) {
   }
 
   try {
-    const resp = await axios.get(process.env.ML_MODEL_API, {
-      params: {
-        temperature,
-        oxygen,
-        humidity,
-      },
-    });
+    const resp = await axios.get(
+      "https://firetrack-python-api.onrender.com/predict_forest",
+      {
+        params: {
+          temperature,
+          oxygen,
+          humidity,
+        },
+      }
+    );
     const data = await resp.data;
 
     const newRecord = await Records.create({
@@ -48,7 +51,8 @@ async function model_api(req, res) {
       danger: data.value,
     });
 
-    if (!newRecord) return res.status(403).json({ message: "A New Record Not Created" })
+    if (!newRecord)
+      return res.status(403).json({ message: "A New Record Not Created" });
 
     return res.status(200).json({
       data,
