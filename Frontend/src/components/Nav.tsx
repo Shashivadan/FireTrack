@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { globleUserAtom } from "@/store/atoms/authAtom";
 import { getAuthToken } from "@/utils/AxiosBaseUrl";
+import { motion } from "framer-motion";
 
 function Nav() {
   const Navigate = useNavigate();
@@ -107,12 +108,14 @@ function Nav() {
               </Button>
             </div>
           ) : (
-            <Button
-              onClick={signInHandle}
-              className=" font-[550] bg-[#282c43] text-[0.8rem]"
-            >
-              Sign In
-            </Button>
+            <motion.div whileHover={{ scale: 1.2 }}>
+              <Button
+                onClick={signInHandle}
+                className=" font-[550] bg-[#282c43] text-[0.8rem]"
+              >
+                Sign In
+              </Button>
+            </motion.div>
           )}
         </div>
       </div>
