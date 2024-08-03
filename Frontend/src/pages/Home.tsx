@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Weather from "@/components/Weather";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -104,6 +105,9 @@ export default function Home() {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="mt-[5rem]"
         >
+          <div>
+            <Weather />
+          </div>
           <Footer />
         </motion.div>
       </div>

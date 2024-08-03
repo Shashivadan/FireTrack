@@ -70,31 +70,38 @@ function HeroModel() {
     }
   };
 
-  // const handleAutoPredict = () => {
-  //   try {
-  //     if (!navigator.geolocation) {
-  //       return toast.error("Geolocation not supported");
-  //     }
-  //     navigator.geolocation.getCurrentPosition(success, error);
-  //     async function success(position: GeolocationPosition) {
-  //       const latitude: number = position.coords.latitude;
-  //       const longitude: number = position.coords.longitude;
-  //       const response = await axios.get("/api/v1/autoperdiction", {
-  //         params: {
-  //           lat: latitude,
-  //           lon: longitude,
-  //         },
-  //       });
-  //       setResult(response.data.result);
-  //       toast.success("sussesfull");
-  //     }
-  //     function error() {
-  //       toast.error("location not avaialbe");
-  //     }
-  //   } catch (error: unknown) {
-  //     return toast.error("some thing went worng");
-  //   }
-  // };
+  const handleAutoPredict = () => {
+    if (!navigator.geolocation) {
+      return toast.error("Geolocation is not supported");
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+
+    async function success(position: GeolocationPosition) {
+      try {
+        const latitude: number = position.coords.latitude;
+        const longitude: number = position.coords.longitude;
+        const response = await axios.get("/api/v1/autoprediction", {
+          params: {
+            lat: latitude,
+            lon: longitude,
+          },
+        });
+        setResult(response.data.result);
+        toast.success("Successful");
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`);
+        } else {
+          toast.error("An unknown error occurred");
+        }
+      }
+    }
+
+    function error() {
+      toast.error("Location not available");
+    }
+  };
 
   return (
     <>
@@ -160,13 +167,13 @@ function HeroModel() {
                   <>Predict</>
                 )}
               </Button>
-              {/* <Button
+              <Button
                 type="button"
                 onClick={handleAutoPredict}
                 className="h-10 font-[700] py-2 px-4 bg-white text-slate-900 hover:bg-white hover:shadow-[0px_0px_10px_10px_rgba(255,255,255,0.1)]"
               >
                 Auto-Predict
-              </Button> */}
+              </Button>
 
               <span className=" text-[0.9rem] text-red-900">
                 {errors.root && errors.root.message}
