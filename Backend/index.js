@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import { router } from "./src/Routes/routes.js";
-mongoose.connect(process.env.DATABASE_URL);
+
+mongoose.connect(process.env.DATABASE_URL).then(() => {
+  console.log("data base conneted");
+});
 
 const port = process.env.PORT | 3000;
 
