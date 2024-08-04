@@ -1,15 +1,15 @@
 import axios, { AxiosInstance } from "axios";
 
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 const Instance: AxiosInstance = axios.create({
-  baseURL: "https://firetrack.onrender.com/",
+  baseURL: "http://localhost:3000/",
   headers: {
     token: "Bearer " + token,
   },
 });
 
-function getAuthToken(): void {
-  const token = sessionStorage.getItem("token");
+function getAuthToken() {
+  const token = localStorage.getItem("token");
   if (!token) {
     delete Instance.defaults.headers.common["token"];
     return;

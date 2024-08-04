@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const globleUserAtom = atom({
   key: "globleUserAtom",
-  default: sessionStorage.getItem("currentUser"),
+  default: localStorage.getItem("currentUser"),
 });
 
 const finalData = atom({

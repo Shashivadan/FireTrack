@@ -39,10 +39,10 @@ function Signin() {
         password,
       });
       const resData = await response.data;
-      sessionStorage.setItem("token", resData.token);
       localStorage.setItem("token", resData.token);
-      sessionStorage.setItem("currentUser", resData.user.username);
-      setCurrentUser(sessionStorage.getItem("currentUser"));
+      localStorage.setItem("token", resData.token);
+      localStorage.setItem("currentUser", resData.user.username);
+      setCurrentUser(localStorage.getItem("currentUser"));
       getAuthToken();
       setIsLoading(false);
       toast.success("sign in successful");

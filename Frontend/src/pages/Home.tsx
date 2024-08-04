@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Opensource from "@/components/Opensource";
-import Feature from "./Feature";
+import Feature from "../components/Feature";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
@@ -12,7 +12,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   function handleClick() {
-    if (!sessionStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       return toast.warning("Signin before continuing");
     }
     navigate("/froestprediction");
@@ -83,10 +83,11 @@ export default function Home() {
             </motion.div>
           </div>
         </motion.div>
+        <div id="feature"></div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, damping: 15, type: "spring" }}
         >
           <Feature />
         </motion.div>

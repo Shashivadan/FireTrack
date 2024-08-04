@@ -11,6 +11,7 @@ import { useState } from "react";
 import useComponentSpanRender from "@/hooks/useComponentSpanRender";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
+import Instance from "@/utils/AxiosBaseUrl";
 
 type PropType = {
   status: string;
@@ -81,7 +82,7 @@ function HeroModel() {
       try {
         const latitude: number = position.coords.latitude;
         const longitude: number = position.coords.longitude;
-        const response = await axios.get("/api/v1/autoprediction", {
+        const response = await Instance.get("api/v1/autoperdiction", {
           params: {
             lat: latitude,
             lon: longitude,
@@ -90,6 +91,8 @@ function HeroModel() {
         setResult(response.data.result);
         toast.success("Successful");
       } catch (error) {
+        console.log(error);
+
         if (error instanceof Error) {
           toast.error(`Error: ${error.message}`);
         } else {

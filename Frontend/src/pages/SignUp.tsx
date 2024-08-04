@@ -12,6 +12,7 @@ import { globleUserAtom } from "@/store/atoms/authAtom";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
+import { isAxiosError } from "axios";
 
 const schema = z
   .object({
@@ -57,23 +58,23 @@ function SignUp() {
         password,
       });
       const responseData = await response.data;
-      console.log(responseData.token);
 
-      sessionStorage.setItem("currentUser", responseData.user.username);
-      sessionStorage.setItem("token", responseData.token);
+      localStorage.setItem("currentUser", responseData.user.username);
+      localStorage.setItem("token", responseData.token);
       setCurrentUser(localStorage.getItem("currentUser"));
-
       getAuthToken();
       setIsLoading(false);
       Navigate("/");
       toast.success("sign up successful");
       window.location.reload();
-    } catch (error: any) {
+    } catch (error: unknown) {
       setIsLoading(false);
       toast.error("sign up failed");
-      if (error?.response?.data?.massege) {
-        setError("root", { message: error?.response?.data?.massege });
-        return;
+      if (isAxiosError(error)) {
+        if (error?.response?.data?.massege) {
+          setError("root", { message: error?.response?.data?.massege });
+          return;
+        }
       }
       setError("root", { message: "Some the went wrong" });
     }
