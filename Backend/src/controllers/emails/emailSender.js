@@ -21,21 +21,19 @@ async function sendEmails(emails) {
       subject: "Warning",
       html: emailWarning,
     });
-    return true;
   } catch (error) {
     console.log("error", error);
     return false;
   }
 }
 
-export async function sendWarningMails(id) {
+export async function sendWarningMails(userid) {
   try {
-    const { emails } = await Emails.findOne({ userId: id });
+    // const { emails } = await Emails.findOne({ userId: id });
+    // if (!emails) return false;
+    const email = ["spearkshashi@gmail.com"];
 
-    if (!emails) return false;
-
-    await sendEmails(emails);
-    return true;
+    await sendEmails(email);
   } catch (error) {
     return false;
   }

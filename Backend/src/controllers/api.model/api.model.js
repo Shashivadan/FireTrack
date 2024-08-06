@@ -56,8 +56,8 @@ async function model_api(req, res) {
       res.status(403).json({ message: "A New Record Not Created" });
     }
 
-    if (data.danger) {
-      sendWarningMails(req.userId);
+    if (data.value) {
+      await sendWarningMails(req.userId);
     }
 
     return res.status(200).json({
