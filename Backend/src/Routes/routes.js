@@ -14,6 +14,7 @@ import {
 } from "../controllers/weather.api/weather.api.js";
 
 import { getEmails } from "../controllers/emails/emails.js";
+import { sendEmails } from "../controllers/emails/emailSender.js";
 
 const router = Router();
 
@@ -35,5 +36,6 @@ router.get("/autoperdiction", authMiddleWare, automaticPrediction);
 //get emails
 
 router.post("/getemails", getEmails);
+// router.post("/sent", sendEmails);
 
 export { router };

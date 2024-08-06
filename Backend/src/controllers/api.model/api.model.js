@@ -1,6 +1,7 @@
 import zod from "zod";
 import axios from "axios";
 import Records from "../../models/Records.js";
+import { sendWarningMails } from "../emails/emailSender.js";
 
 const attributeValuditer = zod.object({
   temperature: zod.string(),
@@ -51,8 +52,13 @@ async function model_api(req, res) {
       danger: data.value,
     });
 
-    if (!newRecord)
-      return res.status(403).json({ message: "A New Record Not Created" });
+    if (!newRecord) {
+      res.status(403).json({ message: "A New Record Not Created" });
+    }
+
+    if (data.danger) {
+      sendWarningMails(req.userId);
+    }
 
     return res.status(200).json({
       data,

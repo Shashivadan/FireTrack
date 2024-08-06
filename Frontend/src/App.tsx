@@ -3,6 +3,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
 import { Toaster } from "sonner";
+import SetEmails from "./pages/SetEmails";
 const SignUp = lazy(() => import("@/pages/SignUp"));
 const Home = lazy(() => import("@/pages/Home"));
 const HeroModel = lazy(() => import("@/pages/HeroModel"));
@@ -67,6 +68,16 @@ function App() {
               <PrivateRoute>
                 <Suspense fallback={<Loader />}>
                   <Logs />
+                </Suspense>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/setemails"
+            element={
+              <PrivateRoute>
+                <Suspense fallback={<Loader />}>
+                  <SetEmails />
                 </Suspense>
               </PrivateRoute>
             }
