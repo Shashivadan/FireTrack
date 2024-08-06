@@ -41,7 +41,7 @@ function Nav() {
     },
     { label: "Assistance", path: "/assistance", requiresAuth: true },
     { label: "Logs", path: "/logs", requiresAuth: true },
-    { label: "Doc", path: "" },
+    { label: "about", path: "/about" },
   ];
 
   return (

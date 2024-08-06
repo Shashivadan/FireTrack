@@ -26,6 +26,14 @@ function App() {
             }
           />
           <Route
+            path="/About"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
             path="/signin"
             element={
               <Suspense fallback={<Loader />}>
