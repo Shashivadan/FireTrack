@@ -1,4 +1,3 @@
-import Nav from "@/components/Nav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "@/utils/AxiosBaseUrl";
@@ -36,7 +35,6 @@ function Assistanse() {
   return (
     <>
       <div className="w-full md:max-w-screen-xl m-auto px-3 md:px-2">
-        <Nav />
         <div className=" min-h-[calc(100vh-60px)] p-6">
           <div className=" min-h-[85vh] flex flex-col justify-end w-full bg-slate-800 rounded-2xl p-3">
             <div className="h-fit min-h-[90%]  w-full  p-6">

@@ -1,6 +1,5 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Nav from "@/components/Nav";
 import Warning from "@/components/Warning";
 import { useForm } from "react-hook-form";
 import { Oval } from "react-loader-spinner";
@@ -109,7 +108,6 @@ function HeroModel() {
   return (
     <>
       <div className="w-full md:max-w-screen-xl m-auto">
-        <Nav />
         <div className="h-[calc(100vh-60px)]">
           <div className="w-full h-full flex flex-col justify-center items-center ">
             <form

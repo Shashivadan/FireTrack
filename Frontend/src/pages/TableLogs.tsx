@@ -1,4 +1,3 @@
-import Nav from "@/components/Nav";
 import {
   Table,
   TableBody,
@@ -27,7 +26,7 @@ type DataType = {
   createdAt: string;
 };
 
-function Logs() {
+function TableLogs() {
   const [data, setData] = useState<DataType[] | null>(null);
 
   useEffect(() => {
@@ -50,7 +49,6 @@ function Logs() {
   return (
     <>
       <div className="w-full md:max-w-screen-xl m-auto px-3 md:px-2">
-        <Nav />
         <div className=" min-h-[calc(100vh-60px)] max-h-fit p-6">
           <div className="flex justify-center items-center">
             <Table>
@@ -112,4 +110,4 @@ function Logs() {
   );
 }
 
-export default Logs;
+export default TableLogs;

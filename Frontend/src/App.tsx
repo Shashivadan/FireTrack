@@ -4,18 +4,22 @@ import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
 import { Toaster } from "sonner";
 import SetEmails from "./pages/SetEmails";
+import AboutSection from "./pages/AboutSection";
+import Nav from "./components/Nav";
 const SignUp = lazy(() => import("@/pages/SignUp"));
 const Home = lazy(() => import("@/pages/Home"));
 const HeroModel = lazy(() => import("@/pages/HeroModel"));
 const Assistanse = lazy(() => import("@/pages/Assistanse"));
 const Signin = lazy(() => import("@/pages/Signin"));
-const Logs = lazy(() => import("@/pages/Logs"));
+const Logs = lazy(() => import("@/pages/TableLogs"));
 
 function App() {
   return (
     <>
       <Toaster richColors />
+
       <div className=" bg-[#030711] text-white ">
+        <Nav />
         <Routes>
           <Route
             path="/"
@@ -29,7 +33,7 @@ function App() {
             path="/About"
             element={
               <Suspense fallback={<Loader />}>
-                <Home />
+                <AboutSection />
               </Suspense>
             }
           />

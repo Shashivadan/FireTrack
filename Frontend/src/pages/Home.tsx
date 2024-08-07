@@ -3,7 +3,6 @@ import Opensource from "@/components/Opensource";
 import Feature from "../components/Feature";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
-import Nav from "@/components/Nav";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Weather from "@/components/Weather";
@@ -42,7 +41,6 @@ export default function Home() {
       className="scrollbar-none text-stone-50 w-full scroll-smooth"
     >
       <div className="bg-transparent h-fit max-w-screen-xl m-auto">
-        <Nav />
         <motion.div variants={staggerChildren} className="h-fit mb-20">
           <div className="mt-[13rem] flex flex-col justify-center items-center">
             <motion.h1
