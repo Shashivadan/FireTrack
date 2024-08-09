@@ -1,21 +1,22 @@
-import { Emails } from "../../models/emails.js"; // Added .js extension
+import { json } from "express";
+import { Emails } from "../../models/emails.js";
 
-async function getEmails(req, res) {
+async function createEmails(req, res) {
   const { emails } = await req.body;
-  const userid = "66afb2c39891b4db580e53fc";
-
-  console.log(emails);
+  const userId = req.userId;
 
   try {
-    const isExistingEmails = await Emails.findOne({ userId: userid });
+    const isExistingEmails = await Emails.findOne({ userId: userId });
 
-    if (isExistingEmails)
-      return res
-        .status(400)
-        .json({ message: "there are already email by this user" });
+    if (isExistingEmails) {
+      await isExistingEmails.updateOne({
+        emails: Array.from(new Set([...isExistingEmails.emails, ...emails])),
+      });
+      return res.json({ message: "Emails updata successfully" });
+    }
 
     await Emails.create({
-      userId: userid,
+      userId: userId,
       emails: emails,
     });
 
@@ -23,7 +24,7 @@ async function getEmails(req, res) {
       message: "Emails saved successfully",
     });
   } catch (error) {
-    console.error("Error saving emails:", error);
+    // console.error("Error saving emails:", error);
 
     res
       .status(500)
@@ -31,4 +32,28 @@ async function getEmails(req, res) {
   }
 }
 
-export { getEmails };
+async function getAllMails(req, res) {
+  const userId = req.userId;
+
+  try {
+    const UserEmails = await Emails.findOne({ userId: userId });
+    if (!UserEmails) {
+      return res.json({
+        message: "No Emails are found on this user",
+        susses: false,
+      });
+    }
+    console.log(UserEmails);
+
+    return res.json({
+      data: { userId: UserEmails.userId, emails: UserEmails.emails },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Intrenal Server Error",
+      susses: false,
+    });
+  }
+}
+
+export { createEmails, getAllMails };

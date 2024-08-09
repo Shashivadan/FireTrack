@@ -13,7 +13,7 @@ import {
   weatherApi,
 } from "../controllers/weather.api/weather.api.js";
 
-import { getEmails } from "../controllers/emails/emails.js";
+import { createEmails, getAllMails } from "../controllers/emails/emails.js";
 
 const router = Router();
 
@@ -34,7 +34,8 @@ router.get("/autoperdiction", authMiddleWare, automaticPrediction);
 
 //get emails
 
-router.post("/getemails", getEmails);
+router.post("/createemails", authMiddleWare, createEmails);
+router.get("/getmails", authMiddleWare, getAllMails);
 // router.post("/sent", sendEmails);
 
 export { router };
