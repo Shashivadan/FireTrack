@@ -13,6 +13,9 @@ import {
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
+import { toast } from "sonner";
+import { isAxiosError } from "axios";
+import Instance from "@/utils/AxiosBaseUrl";
 
 export function MailModel() {
   const [emails, setEmails] = useState([""]);
@@ -29,9 +32,38 @@ export function MailModel() {
     setEmails(newEmails);
   };
 
-  const handleSubmit = () => {
-    // Handle form submission here
-    console.log("Submitted emails:", emails);
+  function emailValidtion(emails: string[]) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validEmails = emails.filter((email) => emailRegex.test(email));
+    if (validEmails.length !== emails.length) {
+      toast.warning(
+        `${
+          emails.length - validEmails.length
+        } valid email(s) found. Invalid emails were removed.`
+      );
+      return false;
+    }
+    return true;
+  }
+
+  const handleSubmit = async () => {
+    const isVaildEmails = emailValidtion(emails);
+    if (!isVaildEmails) return;
+    try {
+      const res = await Instance.post("/api/v1/createemails", { emails });
+      const result = await res.data;
+      if (result) {
+        toast.success("Your Emails Are Saved");
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (isAxiosError(error)) {
+        toast.warning("some thing went worng");
+        return;
+      }
+      toast.error("Internal Server Error");
+    }
   };
 
   return (
@@ -60,7 +92,9 @@ export function MailModel() {
               <Input
                 key={index}
                 value={email}
-                onChange={(e) => handleEmailChange(index, e.target.value)}
+                onChange={(e) =>
+                  handleEmailChange(index, e.target.value.trim())
+                }
                 className="border-none text-white bg-slate-700 placeholder:text-slate-300 placeholder:font-semibold"
                 placeholder="email@xyz.com"
               />
@@ -74,6 +108,7 @@ export function MailModel() {
           >
             Cancel
           </AlertDialogCancel>
+
           <AlertDialogAction onClick={handleSubmit}>Submit</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

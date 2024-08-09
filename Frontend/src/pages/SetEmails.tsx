@@ -56,7 +56,7 @@ export default function SetEmails() {
               {data && <EmailCard data={data?.emails} />}
               {error && (
                 <>
-                  <p> sorry error occured</p>
+                  <p>sorry error occured</p>
                 </>
               )}
             </CardContent>
