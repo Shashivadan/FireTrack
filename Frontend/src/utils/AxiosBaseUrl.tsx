@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 
 const token = localStorage.getItem("token");
 const Instance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://firetrack.onrender.com/",
   headers: {
     token: "Bearer " + token,
   },

@@ -11,7 +11,7 @@ import useComponentSpanRender from "@/hooks/useComponentSpanRender";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
 import Instance from "@/utils/AxiosBaseUrl";
-
+import { motion } from "framer-motion";
 type PropType = {
   status: string;
   probability: number;
@@ -108,9 +108,12 @@ function HeroModel() {
   return (
     <>
       <div className="w-full md:max-w-screen-xl m-auto">
-        <div className="h-[calc(100vh-60px)]">
+        <div className="h-[calc(100vh-52px)]">
           <div className="w-full h-full flex flex-col justify-center items-center ">
-            <form
+            <motion.form
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, type: "spring" }}
               className="w-[350px] flex flex-col gap-3 p-4"
               onSubmit={handleSubmit(onSubmit)}
               action=""
@@ -125,9 +128,9 @@ function HeroModel() {
                 type="number"
                 placeholder="Temperature"
               />
-              <span className="text-[0.9rem] text-red-900">
+              <motion.div className="text-[0.9rem] text-red-900">
                 {errors.temperature && errors.temperature.message}
-              </span>
+              </motion.div>
               <Input
                 min={"0"}
                 {...register("oxygen")}
@@ -135,9 +138,9 @@ function HeroModel() {
                 type="number"
                 placeholder="Oxygen"
               />
-              <span className=" text-[0.9rem] text-red-900">
+              <motion.span className=" text-[0.9rem] text-red-900">
                 {errors.oxygen && errors.oxygen.message}
-              </span>
+              </motion.span>
               <Input
                 min={"0"}
                 {...register("humidity")}
@@ -179,7 +182,7 @@ function HeroModel() {
               <span className=" text-[0.9rem] text-red-900">
                 {errors.root && errors.root.message}
               </span>
-            </form>
+            </motion.form>
             <div className="w-[70%] md:w-[50%]">
               {result && componentRenter ? (
                 <Warning

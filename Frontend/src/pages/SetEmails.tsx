@@ -4,7 +4,7 @@ import { Card, CardTitle, CardContent } from "@/components/ui/card";
 import Instance from "@/utils/AxiosBaseUrl";
 import { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
-// import motion from "framer-motion";
+import { motion } from "framer-motion";
 
 interface axosType {
   data: ResType;
@@ -46,7 +46,12 @@ export default function SetEmails() {
         <div className=" text-3xl font-serif mb-10 text-center mt-10">
           Give mail who you what to alert about fire
         </div>
-        <div className=" w-1/2 m-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className=" w-1/2 m-auto"
+        >
           <Card className="  bg-slate-900 border-none p-5 text-white">
             <CardTitle className=" mb-5 flex items-center justify-between">
               <div className="text-lg">Emails</div>
@@ -56,12 +61,12 @@ export default function SetEmails() {
               {data && <EmailCard data={data?.emails} />}
               {error && (
                 <>
-                  <p>sorry error occured</p>
+                  <p className=" text-sm text-red-800">Sorry Error Occured</p>
                 </>
               )}
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
       </div>
     </>
   );

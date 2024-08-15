@@ -45,8 +45,8 @@ export default function Home() {
           <div className="mt-[13rem] flex flex-col justify-center items-center">
             <motion.h1
               initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, damping: 15, type: "spring" }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.9, damping: 25, type: "spring" }}
               className="text-[2rem] tracking-tighter text-center w-[90%] font-[750] md:leading-[5rem] font-Inter md:text-[4.5rem]"
             >
               Turning the Heat Down: Revolutionizing Forest Fire Prevention.
@@ -85,7 +85,8 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, damping: 15, type: "spring" }}
+          transition={{ duration: 0.5, damping: 30, type: "spring" }}
+          viewport={{ once: true }}
         >
           <Feature />
         </motion.div>
@@ -93,11 +94,13 @@ export default function Home() {
           whileInView={{ scale: 1, opacity: 1 }}
           initial={{ opacity: 0, y: 20, scale: 0 }}
           // animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, type: "spring", damping: 10 }}
+          transition={{ duration: 0.9, type: "spring", damping: 25 }}
+          viewport={{ once: true }}
           className="mb-10"
         >
           <Opensource />
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
